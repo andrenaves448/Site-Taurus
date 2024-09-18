@@ -1,0 +1,127 @@
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+    <title>Tauros Peças</title>
+    </head>
+    <body>
+        <header>
+          <h1>Tauros Peças</h1>
+        </header>
+        <nav>
+          <ul>
+            <li><a href="#home">Início</a></li>
+            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="#sobre">Sobre Nós</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </nav>
+        <main>
+          <section id="home" class="hero">
+            <h2>Qualidade e Confiança em Peças de Caminhão</h2>
+          </section>
+          <section id="produtos">
+            <h2>Nossos Produtos</h2>
+            <div class="products">
+              <div class="product-slider" style="transform: translateX(-524px);">
+                <div class="product">
+                  <img src="img/motor.jpg" alt="Motor de camião potente, prateado, com detalhes em azul" width="200" height="150">
+                  <h3>Motores</h3>
+                  <p>Motores potentes e duráveis para todos os modelos de camião.</p>
+                </div>
+                <div class="product">
+                  <img src="img/sistema-freio.jpg" alt="Sistema de freios de camião, disco e pinça em close-up com detalhes em azul" width="200" height="150">
+                  <h3>Sistemas de Freio</h3>
+                  <p>Freios de alta performance para segurança máxima.</p>
+                </div>
+                <div class="product">
+                  <img src="img/suspensao.jpg" alt="Sistema de suspensão de camião, molas e amortecedores com acabamento em azul metálico" width="200" height="150">
+                  <h3>Suspensão</h3>
+                  <p>Componentes de suspensão para um passeio suave e estável.</p>
+                </div>
+                <div class="product">
+                  <img src="img/transmisao.jpg" alt="Caixa de transmissão de camião, peça mecânica complexa com detalhes em azul" width="200" height="150">
+                  <h3>Transmissão</h3>
+                  <p>Sistemas de transmissão eficientes para todos os tipos de carga.</p>
+                </div>
+                <div class="product">
+                  <img src="img/eletrica.jpg" alt="Sistema elétrico de camião, fios e conectores em cores vivas" width="200" height="150">
+                  <h3>Sistema Elétrico</h3>
+                  <p>Componentes elétricos de alta qualidade para um funcionamento confiável.</p>
+                </div>
+                <div class="product">
+                  <img src="img/pneus.jpg" alt="Pneus robustos de camião com sulcos profundos" width="200" height="150">
+                  <h3>Pneus</h3>
+                  <p>Pneus duráveis para todas as condições de estrada.</p>
+                </div>
+              </div>
+            </div>
+            <div class="slider-dots"><div class="slider-dot"></div><div class="slider-dot"></div><div class="slider-dot active"></div><div class="slider-dot"></div></div>
+          </section>
+          <section id="sobre">
+            <h2>Sobre Nós</h2>
+            <p>A Peças de Camião Brasil é líder no mercado de peças e componentes para camiões. Com mais de 20 anos de experiência, oferecemos produtos de alta qualidade das melhores marcas nacionais e internacionais. Nossa missão é manter sua frota em movimento com eficiência e segurança.</p>
+          </section>
+          <section id="contato">
+            <h2>Entre em Contato</h2>
+            <p>Estamos aqui para ajudar! Entre em contato conosco para obter mais informações sobre nossos produtos e serviços.</p>
+            <p>Email: contato@pecasdecamiaobrasil.com</p>
+            <p>Telefone: (11) 1234-5678</p>
+          </section>
+        </main>
+        <footer>
+          <p>© 2023 Peças de Camião Brasil. Todos os direitos reservados.</p>
+        </footer>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+              link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+              });
+            });
+      
+            const slider = document.querySelector('.product-slider');
+            const sliderDots = document.querySelector('.slider-dots');
+            const products = document.querySelectorAll('.product');
+            const totalSlides = products.length;
+            const visibleSlides = 3;
+            let slideIndex = 0;
+      
+            // Create dots
+            for (let i = 0; i < totalSlides - visibleSlides + 1; i++) {
+              const dot = document.createElement('div');
+              dot.classList.add('slider-dot');
+              if (i === 0) dot.classList.add('active');
+              dot.addEventListener('click', () => showSlide(i));
+              sliderDots.appendChild(dot);
+            }
+      
+            function showSlide(index) {
+              slideIndex = index;
+              const slideWidth = products[0].offsetWidth + 20; // 20 for margins
+              slider.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+              updateDots();
+            }
+      
+            function updateDots() {
+              const dots = document.querySelectorAll('.slider-dot');
+              dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === slideIndex);
+              });
+            }
+      
+            // Auto slide every 5 seconds
+            setInterval(() => {
+              slideIndex = (slideIndex + 1) % (totalSlides - visibleSlides + 1);
+              showSlide(slideIndex);
+            }, 5000);
+          });
+        </script>
+    </body>
+</html>
